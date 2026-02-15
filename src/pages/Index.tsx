@@ -1,14 +1,20 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useAuth } from "@/lib/auth";
+import { Navigate } from "react-router-dom";
+import Chat from "./Chat";
+import { Loader2 } from "lucide-react";
 
-const Index = () => {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+export default function Index() {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-background">
+        <Loader2 className="animate-spin text-primary" size={32} />
       </div>
-    </div>
-  );
-};
+    );
+  }
 
-export default Index;
+  if (!user) return <Navigate to="/auth" replace />;
+
+  return <Chat />;
+}
