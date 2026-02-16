@@ -1,3 +1,6 @@
+window.onerror = function(msg, url, line) {
+  alert("Error: " + msg + "\nLine: " + line);
+};
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
