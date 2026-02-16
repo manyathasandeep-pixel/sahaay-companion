@@ -9,5 +9,12 @@
   <body>
     <div id="root"></div>
     <script type="module" src="src/main.tsx"></script>
+    
+    <script>
+      // This will alert your phone if the script fails to load
+      window.addEventListener('error', function(e) {
+        alert("Script Error: " + e.message);
+      }, true);
+    </script>
   </body>
 </html>
