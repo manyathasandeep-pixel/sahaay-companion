@@ -5,26 +5,21 @@ import { componentTagger } from "lovable-tagger";
 
 export default defineConfig({
   base: "/",
-  plugins: [
-    react(),
-    componentTagger(),
-  ],
+  plugins: [react(), componentTagger()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
   build: {
+    // This 'es2015' is the secret—it works on almost all mobile phones
+    target: 'es2015', 
     outDir: "dist",
     assetsDir: "assets",
-    minify: "esbuild",
-    reportCompressedSize: false,
-    chunkSizeWarningLimit: 2000,
+    cssCodeSplit: false, // Keeps CSS simple for mobile
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor': ['react', 'react-dom'],
-        },
+        manualChunks: undefined, // Prevents files from being split and lost
       },
     },
   },
