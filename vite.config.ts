@@ -4,7 +4,6 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig({
-  base: "/",
   plugins: [react(), componentTagger()],
   resolve: {
     alias: {
@@ -13,14 +12,8 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    chunkSizeWarningLimit: 1600,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'vendor': ['react', 'react-dom'],
-          'ui-parts': ['lucide-react']
-        },
-      },
-    },
+    minify: 'esbuild',
+    reportCompressedSize: false,
+    chunkSizeWarningLimit: 2000,
   },
 });
