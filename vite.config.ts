@@ -3,25 +3,21 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-export default defineConfig(({ mode }) => ({
-  base: "/",
-  plugins: [
-    react(), 
-    mode === "development" && componentTagger()
-  ].filter(Boolean),
+export default defineConfig({
+  plugins: [react(), componentTagger()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
   build: {
-    // This makes the code compatible with older phone browsers
-    target: 'es2015',
     outDir: 'dist',
-    // This breaks the "649kB brick" into smaller, manageable pieces
+    assetsDir: 'assets',
+    sourcemap: false,
+    minify: 'terser',
     rollupOptions: {
       output: {
-        manualChunks(id) {
+        manualChunks: (id) => {
           if (id.includes('node_modules')) {
             return 'vendor';
           }
@@ -29,4 +25,4 @@ export default defineConfig(({ mode }) => ({
       },
     },
   },
-}));
+});
