@@ -1,15 +1,2 @@
-window.onerror = function(msg, url, line) {
-  alert("Error: " + msg + "\nLine: " + line);
-};
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
-// This line connects the firebase file you just made
-import './firebase' 
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+document.body.innerHTML = '<h1 style="color: red; padding: 50px;">IF YOU SEE THIS, THE CODE IS WORKING.</h1>';
+console.log("Code is running");
