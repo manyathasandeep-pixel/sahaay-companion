@@ -5,16 +5,20 @@ import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
   base: "/",
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  plugins: [
+    react(), 
+    mode === "development" && componentTagger()
+  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
   build: {
+    // This makes the code compatible with older phone browsers
     target: 'es2015',
     outDir: 'dist',
-    chunkSizeWarningLimit: 1000,
+    // This breaks the "649kB brick" into smaller, manageable pieces
     rollupOptions: {
       output: {
         manualChunks(id) {
