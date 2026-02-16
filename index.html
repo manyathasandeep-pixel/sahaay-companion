@@ -2,28 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sahaay Companion</title>
-    <style>
-      #debug-log { position: fixed; top: 0; left: 0; background: rgba(0,0,0,0.8); color: white; font-size: 12px; z-index: 9999; }
-    </style>
   </head>
   <body>
-    <div id="debug-log">Status: Loading Scripts...</div>
     <div id="root"></div>
-
-    <script type="module" src="src/main.tsx" onerror="document.getElementById('debug-log').innerText='ERROR: Could not find src/main.tsx'"></script>
-
-    <script>
-      // If this runs, it means index.html is working
-      setTimeout(() => {
-        const root = document.getElementById('root');
-        if (root && root.innerHTML === "") {
-          document.getElementById('debug-log').innerText = "ERROR: React failed to render into #root. Check console.";
-        } else {
-          document.getElementById('debug-log').style.display = 'none';
-        }
-      }, 3000);
-    </script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
