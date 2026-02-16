@@ -4,6 +4,8 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig({
+  // Force absolute paths so Vercel doesn't lose your files
+  base: '/',
   plugins: [react(), componentTagger()],
   resolve: {
     alias: {
@@ -11,9 +13,17 @@ export default defineConfig({
     },
   },
   build: {
+    // This 'es2015' target makes it work on almost all mobile phones
+    target: 'es2015',
     outDir: 'dist',
-    minify: 'esbuild',
-    reportCompressedSize: false,
-    chunkSizeWarningLimit: 2000,
+    assetsDir: 'assets',
+    // This ensures your main file isn't too heavy for mobile memory
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+        },
+      },
+    },
   },
 });
