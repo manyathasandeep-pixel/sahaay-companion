@@ -4,6 +4,8 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig({
+  // This helps Vercel find your files correctly
+  base: './',
   plugins: [react(), componentTagger()],
   resolve: {
     alias: {
@@ -12,15 +14,12 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    assetsDir: 'assets',
-    sourcemap: false,
     minify: 'terser',
+    chunkSizeWarningLimit: 1600,
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            return 'vendor';
-          }
+        manualChunks: {
+          'vendor': ['react', 'react-dom'],
         },
       },
     },
